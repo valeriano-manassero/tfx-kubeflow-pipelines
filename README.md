@@ -5,7 +5,7 @@ Kubeflow pipelines built on top of Tensorflow TFX library
 This repository contains machine learning pipelines based on Tensorflow TFX library.
 Every pipeline is designed to be published on a Kubernetes/Kubeflow cluster *on premise*.
 
-### Tutorials
+### Pipelines
 Each folder contains needed code and data for the Kubeflow Pipeline, plus a README that includes:
 
 * pipeline general information

@@ -5,7 +5,8 @@ This pipeline will generate and publish a DNN model ready to predict trained on 
 Dataset is included in this repository. no further actions needed.
 
 ## Interactive Jupyter notebook
-A notebook called `interactive.ipynb` with the entire pipeline and data handling visualizations is included and can be served in a notebook server mounting the `tfx` PersistentVolume.
+A notebook called `interactive.ipynb` with the entire pipeline and data handling visualizations is included.
+It can be served in a notebook instance by Kubeflow mounting the `tfx` PersistentVolume.
 
 ## Build and launch
 To build the pipeline is:

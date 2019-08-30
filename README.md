@@ -48,6 +48,13 @@ spec:
 ### Utils files deployment
 Cloning this repository into the root of the `tfx` PersistentVolume is needed before starting any pipeline.
 
+## Local development and building
+Some python libraries are needed. Install them with:
+```
+pip install -r requirements.txt
+```
+requirements.txt file is on root of this repo.
+
 ## Useful links
 * [Kubeflow](https://www.kubeflow.org/)
 * [Tensorflow](https://www.tensorflow.org/)

@@ -16,6 +16,7 @@ Further pipelines are welcome via pull request.
 
 ## Pipelines:
 * **[iris](iris)** - Complete pipeline for a DNN model on IRIS dataset.
+* **[cifar-10](cifar-10)** - Complete pipeline for a CNN model on CIFAR-10 dataset.
 
 ## Prerequisites
 Here some prerequisites needed to deploy this repo.

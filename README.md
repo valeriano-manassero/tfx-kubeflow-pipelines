@@ -11,6 +11,7 @@ Each folder contains needed code and data for the Kubeflow Pipeline, plus a READ
 * pipeline general information
 * specific Kubernetes resources setup instructions
 * specific data handling about pipeline on premise
+* build and launch procedure
 
 Further pipelines are welcome via pull request.
 

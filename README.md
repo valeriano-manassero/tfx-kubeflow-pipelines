@@ -15,7 +15,7 @@ Each folder contains needed code and data for the Kubeflow Pipeline, plus a READ
 Further pipelines are welcome via pull request.
 
 ## Pipelines:
-*_TODO_*
+* **[iris](iris)** - Complete pipeline for a DNN model on IRIS dataset.
 
 #### Useful links
 * [Kubeflow](https://www.kubeflow.org/)

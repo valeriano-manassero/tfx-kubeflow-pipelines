@@ -50,8 +50,7 @@ def _create_pipeline(pipeline_name: Text, pipeline_root: Text, data_root: Text,
         examples=example_gen.outputs.examples,
         model_exports=trainer.outputs.output,
         feature_slicing_spec=evaluator_pb2.FeatureSlicingSpec(specs=[
-            evaluator_pb2.SingleSlicingSpec(
-                column_for_slicing=['trip_start_hour'])
+            evaluator_pb2.SingleSlicingSpec()
         ]))
     model_validator = ModelValidator(
         examples=example_gen.outputs.examples, model=trainer.outputs.output)

@@ -41,10 +41,16 @@ def _input_fn(filenames, tf_transform_output, batch_size):
 
     transformed_features = dataset.make_one_shot_iterator().get_next()
 
-    images = tf.decode_raw(transformed_features[_transformed_name(_IMAGE_KEY)], tf.int32)
-    images = tf.reshape(images, (-1, 224, 224, 3))
-    images = tf.cast(images, tf.float32) * (1. / 255) - 0.5
-    transformed_features['mobilenetv2_1.00_224_input'] = images
+    def parser(image_str):
+        image = tf.image.decode_image(image_str)
+        image = tf.reshape(image, (224, 224, 3))
+        image = tf.cast(image, tf.float32) / 127.5 - 1.
+        return image
+
+    transformed_features['mobilenetv2_1.00_224_input'] = \
+        tf.compat.v2.map_fn(lambda x: parser(x),
+                            transformed_features[_transformed_name(_IMAGE_KEY)],
+                            dtype=tf.float32)
     transformed_features.pop(_transformed_name(_IMAGE_KEY))
 
     transformed_features[_transformed_name(_LABEL_KEY)] = tf.one_hot(

@@ -13,6 +13,7 @@ from tfx.orchestration import pipeline
 from tfx.orchestration.kubeflow.runner import KubeflowRunner
 from tfx.orchestration.kubeflow.kubeflow_dag_runner import KubeflowDagRunnerConfig
 from tfx.proto import evaluator_pb2
+from tfx.proto import example_gen_pb2
 from tfx.proto import pusher_pb2
 from tfx.proto import trainer_pb2
 from tfx.utils.dsl_utils import external_input
@@ -29,7 +30,11 @@ _serving_model_dir = os.path.join(_pipeline_root, 'serving_model', _pipeline_nam
 def _create_pipeline(pipeline_name: Text, pipeline_root: Text, data_root: Text,
                      module_file: Text, serving_model_dir: Text) -> pipeline.Pipeline:
     examples = external_input(data_root)
-    example_gen = CsvExampleGen(input_base=examples)
+    input_split = example_gen_pb2.Input(splits=[
+        example_gen_pb2.Input.Split(name='train', pattern='iris_training.csv'),
+        example_gen_pb2.Input.Split(name='eval', pattern='iris_test.csv')
+    ])
+    example_gen = CsvExampleGen(input_base=examples, input_config=input_split)
     statistics_gen = StatisticsGen(input_data=example_gen.outputs.examples)
     infer_schema = SchemaGen(stats=statistics_gen.outputs.output)
     validate_stats = ExampleValidator(

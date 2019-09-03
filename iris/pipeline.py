@@ -44,8 +44,8 @@ def _create_pipeline(pipeline_name: Text, pipeline_root: Text, data_root: Text,
         transformed_examples=transform.outputs.transformed_examples,
         schema=infer_schema.outputs.output,
         transform_output=transform.outputs.transform_output,
-        train_args=trainer_pb2.TrainArgs(num_steps=10000),
-        eval_args=trainer_pb2.EvalArgs(num_steps=5000))
+        train_args=trainer_pb2.TrainArgs(num_steps=1000),
+        eval_args=trainer_pb2.EvalArgs(num_steps=500))
     model_analyzer = Evaluator(
         examples=example_gen.outputs.examples,
         model_exports=trainer.outputs.output,

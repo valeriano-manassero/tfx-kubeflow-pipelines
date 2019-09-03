@@ -16,6 +16,7 @@ Further pipelines are welcome via pull request.
 
 ## Pipelines:
 * **[iris](iris)** - Complete pipeline for a DNN model on IRIS dataset.
+* **[cifar-10](cifar-10)** - Complete pipeline for a CNN model on CIFAR-10 dataset.
 
 ## Prerequisites
 Here some prerequisites needed to deploy this repo.
@@ -46,6 +47,13 @@ spec:
 
 ### Utils files deployment
 Cloning this repository into the root of the `tfx` PersistentVolume is needed before starting any pipeline.
+
+## Local development and building
+Some python libraries are needed. Install them with:
+```
+pip install -r requirements.txt
+```
+requirements.txt file is on root of this repo.
 
 ## Useful links
 * [Kubeflow](https://www.kubeflow.org/)

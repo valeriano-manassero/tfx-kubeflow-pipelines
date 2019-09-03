@@ -1,7 +1,7 @@
 import os
 from typing import Text
 from tfx.components.evaluator.component import Evaluator
-from tfx.components.example_gen.csv_example_gen.component import CsvExampleGen
+from tfx.components.example_gen.import_example_gen.component import ImportExampleGen
 from tfx.components.example_validator.component import ExampleValidator
 from tfx.components.model_validator.component import ModelValidator
 from tfx.components.pusher.component import Pusher
@@ -20,7 +20,7 @@ from tfx.utils.dsl_utils import external_input
 from kfp import onprem
 
 
-_pipeline_name = 'iris'
+_pipeline_name = 'cifar-10'
 _tfx_root = '/mnt/tfx-pv'
 _pipeline_root = os.path.join(_tfx_root, _pipeline_name)
 _module_file = os.path.join(_pipeline_root, 'utils.py')
@@ -31,10 +31,10 @@ def _create_pipeline(pipeline_name: Text, pipeline_root: Text, data_root: Text,
                      module_file: Text, serving_model_dir: Text) -> pipeline.Pipeline:
     examples = external_input(data_root)
     input_split = example_gen_pb2.Input(splits=[
-        example_gen_pb2.Input.Split(name='train', pattern='iris_training.csv'),
-        example_gen_pb2.Input.Split(name='eval', pattern='iris_test.csv')
+        example_gen_pb2.Input.Split(name='train', pattern='train.tfrecord'),
+        example_gen_pb2.Input.Split(name='eval', pattern='test.tfrecord')
     ])
-    example_gen = CsvExampleGen(input_base=examples, input_config=input_split)
+    example_gen = ImportExampleGen(input_base=examples, input_config=input_split)
     statistics_gen = StatisticsGen(input_data=example_gen.outputs.examples)
     infer_schema = SchemaGen(stats=statistics_gen.outputs.output)
     validate_stats = ExampleValidator(

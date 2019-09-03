@@ -1,5 +1,5 @@
 # CIFAR-10 pipeline
-This pipeline will generate and publish a DNN model ready to predict trained on a version of IRIS Dataset.
+This pipeline will generate and publish a CNN model ready to predict trained on CIFAR-10 Dataset.
 
 ## Data handling
 A notebook called `data-preparation.ipynb` should be played to get initial tfrecords from the entire dataset.

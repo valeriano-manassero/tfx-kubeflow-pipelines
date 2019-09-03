@@ -2,7 +2,8 @@
 This pipeline will generate and publish a DNN model ready to predict trained on a version of IRIS Dataset.
 
 ## Data handling
-[TODO]
+A notebook called `data-preparation.ipynb` should be played to get initial tfrecords from the entire dataset.
+This is mandatory before running any pipeline version.
 
 ## Interactive Jupyter notebook
 A notebook called `interactive.ipynb` with the entire pipeline and data handling visualizations is included.

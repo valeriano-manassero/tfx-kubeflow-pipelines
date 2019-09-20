@@ -41,7 +41,7 @@ def _create_pipeline(pipeline_name: Text, pipeline_root: Text, data_root: Text,
         module_file=module_file)
     trainer = Trainer(
         module_file=module_file,
-        transformed_examples=transform.outputs.transformed_examples,
+        examples=transform.outputs.transformed_examples,
         schema=infer_schema.outputs.output,
         transform_output=transform.outputs.transform_output,
         train_args=trainer_pb2.TrainArgs(num_steps=10000),

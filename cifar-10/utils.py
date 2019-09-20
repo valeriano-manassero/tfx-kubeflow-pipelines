@@ -25,15 +25,6 @@ def _get_raw_feature_spec(schema):
     return schema_utils.schema_as_feature_spec(schema).feature_spec
 
 
-def _fill_in_missing(x):
-    default_value = '' if x.dtype == tf.string else 0
-    return tf.squeeze(
-        tf.sparse.to_dense(
-            tf.SparseTensor(x.indices, x.values, [x.dense_shape[0], 1]),
-            default_value),
-        axis=1)
-
-
 def _image_parser(image_str):
     image = tf.image.decode_image(image_str)
     image = tf.reshape(image, (IMAGE_SIZE, IMAGE_SIZE, 3))
@@ -48,10 +39,10 @@ def _label_parser(label_id):
 
 def preprocessing_fn(inputs):
     outputs = {_transformed_name(_IMAGE_KEY): tf.compat.v2.map_fn(lambda x: _image_parser(x),
-                                                                  _fill_in_missing(inputs[_IMAGE_KEY]),
+                                                                  inputs[_IMAGE_KEY],
                                                                   dtype=tf.float32),
                _transformed_name(_LABEL_KEY): tf.compat.v2.map_fn(lambda x: _label_parser(x),
-                                                                  _fill_in_missing(inputs[_LABEL_KEY]),
+                                                                  inputs[_LABEL_KEY],
                                                                   dtype=tf.float32)}
     return outputs
 

@@ -68,9 +68,6 @@ def _create_pipeline(pipeline_name: Text, pipeline_root: Text, data_root: Text,
             example_gen, statistics_gen, infer_schema, validate_stats, transform,
             trainer, model_analyzer, model_validator, pusher
         ],
-        additional_pipeline_args={
-            'tfx_image': 'tensorflow/tfx:0.14.0rc1'
-        },
         log_root='/var/tmp/tfx/logs',
     )
 
@@ -81,7 +78,8 @@ if __name__ == '__main__':
         "tfx-pv",
         _tfx_root)
     config = KubeflowDagRunnerConfig(
-        pipeline_operator_funcs=[mount_volume_op]
+        pipeline_operator_funcs=[mount_volume_op],
+        tfx_image='tensorflow/tfx:0.14.0'
     )
     _pipeline = _create_pipeline(
         pipeline_name=_pipeline_name,

@@ -9,7 +9,7 @@ A notebook called `interactive.ipynb` with the entire pipeline and data handling
 It can be served in a notebook instance by Kubeflow mounting the `tfx` PersistentVolume.
 
 ## Build and launch
-To build the pipeline is:
+To build the pipeline issue this command:
 ```
 python pipeline.py
 ```

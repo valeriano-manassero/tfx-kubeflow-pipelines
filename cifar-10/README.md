@@ -2,15 +2,14 @@
 This pipeline will generate and publish a CNN model ready to predict trained on CIFAR-10 Dataset.
 
 ## Data handling
-A notebook called `data-preparation.ipynb` should be played to get initial tfrecords from the entire dataset.
-This is mandatory before running any pipeline version.
+Dataset is included in this repository. no further actions needed.
 
 ## Interactive Jupyter notebook
 A notebook called `interactive.ipynb` with the entire pipeline and data handling visualizations is included.
 It can be served in a notebook instance by Kubeflow mounting the `tfx` PersistentVolume.
 
 ## Build and launch
-To build the pipeline is:
+To build the pipeline issue this command:
 ```
 python pipeline.py
 ```

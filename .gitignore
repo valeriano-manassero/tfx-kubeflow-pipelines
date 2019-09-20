@@ -3,6 +3,4 @@ venv
 */.ipynb_checkpoints
 */__pycache__
 */*.tar.gz
-cifar-10/data/*.tfrecord
 cifar-10/data/*.tgz
-cifar-10/data/cifar

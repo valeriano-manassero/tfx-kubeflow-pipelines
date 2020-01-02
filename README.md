@@ -23,9 +23,9 @@ Further pipelines are welcome via pull request.
 Here some prerequisites needed to deploy this repo.
 
 ### Platform versions
-* Kubeflow version >=0.6.2
-* Tensorflow >=1.14.0 <2.0
-* Tensorflow TFX ==0.14.0rc1
+* Kubeflow version >= 0.7.1
+* Tensorflow == 2.0.0
+* Tensorflow TFX == 0.15.0
 
 ### Kubernetes cluster
 A PersistentVolumeClaim called `tfx-pvc` is needed so the cluster should have one ready *before* dropping the pipelines.

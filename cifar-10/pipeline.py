@@ -27,7 +27,7 @@ _persistent_volume_claim = 'tfx-pvc'
 _persistent_volume = 'tfx-pv'
 _persistent_volume_mount = '/mnt'
 
-_input_base = os.path.join(_persistent_volume_mount, 'tfx')
+_input_base = os.path.join(_persistent_volume_mount, 'cifar-10')
 _output_base = os.path.join(_persistent_volume_mount, 'pipelines')
 _tfx_root = os.path.join(_output_base, 'tfx')
 _pipeline_root = os.path.join(_tfx_root, _pipeline_name)
@@ -88,7 +88,11 @@ if __name__ == '__main__':
                                                                 pipeline_operator_funcs=([
                                                                     onprem.mount_pvc(_persistent_volume_claim,
                                                                                      _persistent_volume,
-                                                                                     _persistent_volume_mount)]))
+                                                                                     _persistent_volume_mount),
+                                                                    kubeflow_dag_runner._mount_config_map_op('metadata-db-configmap'),
+                                                                    kubeflow_dag_runner._mount_secret_op('metadata-db-secrets')
+                                                                ]
+                                                                ))
 
     kubeflow_dag_runner.KubeflowDagRunner(config=runner_config).run(_create_pipeline(
         pipeline_name=_pipeline_name,

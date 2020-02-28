@@ -1,4 +1,4 @@
 jupyter==1.0.0
 kfp==0.1.38
-tensorflow==2.0.0
+tensorflow==2.0.1
 tfx==0.15.0

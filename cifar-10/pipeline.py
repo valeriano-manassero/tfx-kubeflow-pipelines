@@ -2,7 +2,7 @@ import os
 from typing import Text
 
 from kfp import onprem
-
+import tensorflow_model_analysis as tfma
 from tfx.components.evaluator.component import Evaluator
 from tfx.components.example_gen.import_example_gen.component import ImportExampleGen
 from tfx.components.example_validator.component import ExampleValidator
@@ -14,7 +14,6 @@ from tfx.components.trainer.component import Trainer
 from tfx.components.transform.component import Transform
 from tfx.orchestration import pipeline
 from tfx.orchestration.kubeflow import kubeflow_dag_runner
-from tfx.proto import evaluator_pb2
 from tfx.proto import example_gen_pb2
 from tfx.proto import pusher_pb2
 from tfx.proto import trainer_pb2
@@ -57,12 +56,13 @@ def _create_pipeline(pipeline_name: Text, pipeline_root: Text, data_root: Text, 
     trainer = Trainer(module_file=module_file, transformed_examples=transform.outputs['transformed_examples'],
                       schema=infer_schema.outputs['schema'], transform_graph=transform.outputs['transform_graph'],
                       train_args=trainer_pb2.TrainArgs(num_steps=10000), eval_args=trainer_pb2.EvalArgs(num_steps=5000)
-    )
+                      )
 
+    eval_config = tfma.EvalConfig(
+        slicing_specs=[tfma.SlicingSpec()]
+    )
     model_analyzer = Evaluator(examples=example_gen.outputs['examples'], model=trainer.outputs['model'],
-                               feature_slicing_spec = evaluator_pb2.FeatureSlicingSpec(specs=[
-                                   evaluator_pb2.SingleSlicingSpec()
-                               ]))
+                               eval_config=eval_config)
 
     model_validator = ModelValidator(examples=example_gen.outputs['examples'], model=trainer.outputs['model'])
 

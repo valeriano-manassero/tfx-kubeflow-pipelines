@@ -38,7 +38,7 @@ def preprocessing_fn(inputs):
     return outputs
 
 
-def _keras_model_builder():
+def _model_builder():
     inputs = tf.keras.layers.Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3), name=_transformed_name(_IMAGE_KEY))
     d1 = tf.keras.layers.Conv2D(64, kernel_size=3, activation='relu')(inputs)
     d2 = tf.keras.layers.Conv2D(32, kernel_size=3, activation='relu')(d1)
@@ -112,7 +112,7 @@ def trainer_fn(trainer_fn_args, schema):  # pylint: disable=unused-argument
 
     run_config = run_config.replace(model_dir=trainer_fn_args.serving_model_dir)
 
-    estimator = tf.keras.estimator.model_to_estimator(keras_model=_keras_model_builder(), config=run_config)
+    estimator = tf.keras.estimator.model_to_estimator(keras_model=_model_builder(), config=run_config)
 
     eval_receiver_fn = lambda: _eval_input_receiver_fn(tf_transform_output)
 

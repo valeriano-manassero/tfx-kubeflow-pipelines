@@ -15,9 +15,12 @@ Each folder contains needed code and data for the Kubeflow Pipeline, plus a READ
 Further pipelines are welcome via pull request.
 
 ## Pipelines:
-* **[iris](iris)** - Complete pipeline for a DNN model on IRIS dataset.
-* **[cifar-10](cifar-10)** - Complete pipeline for a CNN model on CIFAR-10 dataset.
-* **[inat-2019](inat-2019)** - Complete pipeline for a MobilenetV2 model on iNaturalist 2019 dataset.
+* **[iris](iris)** - Complete pipeline for a simple (Keras) model on IRIS dataset.
+* **[cifar-10](cifar-10)** - Complete pipeline for a CNN model on CIFAR-10 dataset [NEEDS UPDATE].
+* **[inat-2019](inat-2019)** - Complete pipeline for a MobilenetV2 model on iNaturalist 2019 dataset [NEEDS UPDATE].
+
+## TFX Custom image
+Pipelines are actually using custom TFX images containing NVIDIA drivers for GPU usage from [tfx-nvidia-gpu](https://github.com/valeriano-manassero/tfx-nvidia-gpu)
 
 ## Prerequisites
 Here some prerequisites needed to deploy this repo.
